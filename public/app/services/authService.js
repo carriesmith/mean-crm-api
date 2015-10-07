@@ -42,7 +42,10 @@ angular.module('authService', [])
     // get info from logged in user
     authFactory.getUser = function(){
       if (AuthToken.getToken())
-        return $http.get('/api/me');
+        // whenever the Auth.getUser() call is made
+        // information will check if that information is already
+        // available in cache, instead of hitting API every time
+        return $http.get('/api/me', {cache: true});
       else
         return $q.reject({ message: 'User has no token.' });
     }; // close authFactory.getUser
