@@ -3,10 +3,62 @@
 <head>
   <meta charset="UTF-8">
   <title>MEAN app</title>
+
+  <!-- FOR ANGULAR ROUTING -->
+  <base href = "/">
+
+  <!-- CSS -->
+  <!-- load bootstrap and animate from CND and custom CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.4.0/animate.min.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+
+  <!-- JS -->
+  <!-- load angular and angular-route from CDN -->
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular-route.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular-animate.js"></script>
+
+  <!-- CONTROLLERS -->
+  <script scr="app/controllers/mainCtrl.js"></script>
+  <script src="app/controllers/userCtrl.js"></script>
+
+  <!-- SERVICES -->
+  <script src="app/services/authService.js"></script>
+  <script src="app/services/userService.js"></script>
+
+  <!-- Main Angular app files -->
+  <script src="app/app.routes.js"></script>
+  <script src="app/app.js"></script>
+
 </head>
-<body>
-  <h1>Welcome.</h1>
-  <p>If you arrived here, you have missed the routes defined by Node and
-  you are in the world defined by Angular.</p>
+<body ng-app="userApp" ng-controller="mainController as main">
+
+  <!-- NAVBAR -->
+  <header>
+    <div class="navbar navbar-inverse" ng-if="main.loggedIn">
+      <div class="container">
+        <div class="navbar-header">
+          <a href="/" class="navbar-brand">
+            <span class="glyphicon glyphicon-fire text-danger"></span> User CRM
+          </a>
+          <ul class="nav navbar-nav">
+            <li><a href="/users"><span class="glyphicon glyphicon-user"></span>Users</a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li class="navbar-text" ng-if="!main.loggedIn"><a href="/login">Login</a></li>
+            <li class="navbar-text" ng-if="main.loggedIn">Hello {{main.user.name}}</li>
+            <li class="navbar-text" ng-if="main.loggedIn"><a href="#" ng-click="main.doLogout()">Logout</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- ANGULAR VIEWS -->
+    <div ng-view></div>
+  </main>
+
 </body>
 </html>
