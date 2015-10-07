@@ -7,6 +7,8 @@ angular.module('mainCtrl', [])
     vm.loggedIn = Auth.isLoggedIn();
 
     // check to see if a user is logged in on every request
+    // $rootScope module used to detect a route change and check 
+    // that the user still logged in
     $rootScope.$on('$routeChangeStart', function(){
 
       vm.loggedIn = Auth.isLoggedIn();

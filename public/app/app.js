@@ -1,3 +1,5 @@
+console.log("app.js loaded");
+
 angular.module('userApp', 
   ['ngAnimate', // add animations to angular directives (ngShow / ngHide)
   'app.routes', // routing for application
