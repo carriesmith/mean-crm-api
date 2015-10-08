@@ -1,0 +1,40 @@
+<div class="row col-sm-6 col sm offset 3">
+  <div class="jumbotron">
+    <h1>Login</h1>
+
+    <!-- ng-submit binds form to mainController (alias login) and function doLogin() -->
+    <!-- *** action attribute action="" resets error message ??? -->
+    <!-- <form action="" ng-submit="login.doLogin()"> -->
+    <form ng-submit="login.doLogin()">
+      
+      <!-- USERNAME INPUT -->
+      <!-- ng-model binds input to mainController (alias login) variable loginData.username -->
+      <div class="form-group">
+        <label for="username-input">Username</label>
+        <input id="username-input" type="text" class="form-control" ng-model="login.loginData.username">
+      </div>
+
+      <!-- PASSWORD INPUT -->
+      <!-- ng-model binds input to mainController (alias login) variable loginData.username -->
+      <div class="form-group">
+        <label for="password-input">Password</label>
+        <input id="password-input" type="text" class="form-control" ng-model="login.loginData.password">
+      </div>
+
+      <!-- DISPLAY FAILED LOGIN MESSAGE -->
+      <div class="alert alert-danger" ng-if="login.error">
+        {{login.error}}
+      </div>
+
+      <!-- LOGIN BUTTON -->
+      <button class="btn btn-block btn-primary" type="submit">
+        <!-- LOGIN TEXT ALWAYS ON SCREEN ... WHY ??? -->
+        <span ng-if="!login.processing">Login</span>
+        <span ng-if="login.processing" class="spinner">
+          <span class="glyphicon glyphicon-repeat"></span>
+        </span>
+      </button>
+
+    </form>
+  </div>
+</div>
