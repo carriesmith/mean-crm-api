@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>MEAN app</title>
+  <title>User CRM</title>
 
   <!-- FOR ANGULAR ROUTING -->
   <base href = "/">
@@ -20,7 +20,7 @@
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular-animate.js"></script>
 
   <!-- CONTROLLERS -->
-  <script scr="app/controllers/mainCtrl.js"></script>
+  <script src="app/controllers/mainCtrl.js"></script>
   <script src="app/controllers/userCtrl.js"></script>
 
   <!-- SERVICES -->
@@ -42,17 +42,18 @@
           <a href="/" class="navbar-brand">
             <span class="glyphicon glyphicon-fire text-danger"></span> User CRM
           </a>
-          <ul class="nav navbar-nav">
+          <ul class="nav navbar-nav main-navbar">
             <li><a href="/users"><span class="glyphicon glyphicon-user"></span>Users</a></li>
-          </ul>
+          </ul> <!-- end main-navbar -->
           <ul class="nav navbar-nav navbar-right">
+            <!-- COULD THIS POSSIBLY EVERY HAPPEN ??? DO NOT UNDERSTAND --> 
             <li class="navbar-text" ng-if="!main.loggedIn"><a href="/login">Login</a></li>
             <li class="navbar-text" ng-if="main.loggedIn">Hello {{main.user.name}}</li>
             <li class="navbar-text" ng-if="main.loggedIn"><a href="#" ng-click="main.doLogout()">Logout</a></li>
-          </ul>
-        </div>
-      </div>
-    </div>
+          </ul>  <!-- end navbar-right -->
+        </div> <!-- end navbar-header -->
+      </div> <!-- end container --> 
+    </div> <!-- end navbar-inverse -->
   </header>
 
   <main class="container">

@@ -7,6 +7,8 @@ var app = express(); // define the app using express
 var bodyParser = require('body-parser'); // get body-parser
 var morgan = require('morgan'); // get morgan - allows logging requests to console
 var mongoose = require('mongoose'); // ODM to communicate with MongoDB
+// gives access to variables passed through module.exports() (in config.js)
+var config = require('./config')
 var path = require('path');
 
 
@@ -28,15 +30,16 @@ app.use( function(req, res, next) {
 // log all requests to the console
 app.use(morgan('dev'));
 
-// gives access to variables passed through module.exports() (in config.js)
-var config = require('./config')
-
 // DATABASE -------------------------
 // connect to database (hosted on modulus.io)
 
 // mongoose.connect('mongodb://<user>:<pass>@apollo.modulusmongo.net:27017/ne8haqaZ')
 // *** what is 27017 ???
 mongoose.connect(config.database);
+
+// SET STATIC FILE LOCATION
+// used for requests that our frontend will make
+app.use(express.static(__dirname + '/public'));
 
 // REGISTER ROUTES ------------------
 // all routes will be prefixed with /api

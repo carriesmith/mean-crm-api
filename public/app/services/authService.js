@@ -1,5 +1,3 @@
-console.log("authService.js");
-
 angular.module('authService', [])
   // =============================================
   // auth factory to login and get information

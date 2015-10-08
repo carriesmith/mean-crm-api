@@ -1,47 +1,54 @@
 angular.module('mainCtrl', [])
-  .controller('mainController', function($rootScope, $location, Auth){
 
-    var vm = this;
+.controller('mainController', function($rootScope, $location, Auth) {
 
-    // get info if a person is logged in
-    vm.loggedIn = Auth.isLoggedIn();
+  var vm = this;
 
-    // check to see if a user is logged in on every request
-    // $rootScope module used to detect a route change and check 
-    // that the user still logged in
-    $rootScope.$on('$routeChangeStart', function(){
+  // get info if a person is logged in
+  console.log(Auth.isLoggedIn());
+  vm.loggedIn = Auth.isLoggedIn();
 
-      vm.loggedIn = Auth.isLoggedIn();
+  // check to see if a user is logged in on every request
+  $rootScope.$on('$routeChangeStart', function() {
+    vm.loggedIn = Auth.isLoggedIn();  
 
-      // get user information on route change
-      Auth.getUser()
-        .success(function(data){
-          vm.user = data;
-        });
-    }); // close .$on('$routeChangeStart'...
+    // get user information on page load
+    Auth.getUser()
+      .then(function(data) {
+        vm.user = data.data;
+      }); 
+  }); 
 
-    // function to handle login form
-    vm.doLogin = function(){
+  // function to handle login form
+  vm.doLogin = function() {
+    vm.processing = true;
 
-      // call the Auth.login() function
-      Auth.login(vm.loginData.username, vm.loginData.password)
-        .success(function(data){
+    // clear the error
+    vm.error = '';
 
-          // if a user successfully logs in, redirect to users page
+    Auth.login(vm.loginData.username, vm.loginData.password)
+      .success(function(data) {
+        vm.processing = false;      
+
+        // if a user successfully logs in, redirect to users page
+        if (data.success)     
           $location.path('/users');
+        else 
+          vm.error = data.message;
+        
+      });
+  };
 
-        }); // close .success
-    }; // close vm.doLogin
+  // function to handle logging out
+  vm.doLogout = function() {
+    Auth.logout();
+    vm.user = '';
+    
+    $location.path('/login');
+  };
 
-    // function to handle logging out
-    vm.doLogout = function() {
+  vm.createSample = function() {
+    Auth.createSampleUser();
+  };
 
-      Auth.logout();
-      // reset all user info
-      vm.user = {};
-      // redirect to login page
-      $location.path('/login')
-
-    };
-
-  }) // close .controller('mainController'
+});
