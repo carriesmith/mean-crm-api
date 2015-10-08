@@ -5,7 +5,7 @@ angular.module('app.routes', ['ngRoute'])
     $routeProvider
       // home page route
       .when('/', {
-        templateUrl: 'app/views/pages/home.html'
+        templateUrl:  'app/views/pages/home.html'
       }) // close .when landing
 
       // login page route
@@ -13,6 +13,12 @@ angular.module('app.routes', ['ngRoute'])
         templateUrl:  'app/views/pages/login.html',
         controller:   'mainController',
         controllerAs: 'login'
+      })
+
+      .when('/users', {
+        templateUrl:  'app/views/pages/all.html',
+        controller:   'userController',
+        controllerAs: 'user'
       });
 
     // get rid of the hash in the URL

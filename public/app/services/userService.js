@@ -35,6 +35,6 @@ angular.module('userService', [])
     };   
 
     // return entire userFactory object
-    return myFactory;
+    return userFactory;
 
   }) // close .factory
