@@ -21,10 +21,18 @@ angular.module('app.routes', ['ngRoute'])
         controllerAs: 'user'
       })
 
-      // form edit user / create new user (same view)
+      // create new user route 
+      // (form to create new user and update existing share same view)
       .when('/users/create', {
         templateUrl: 'app/views/pages/users/single.html',
         controller:  'userCreateController', 
+        controllerAs: 'user'
+      })
+
+      // 
+      .when('/users/:user_id', {
+        templateUrl: 'app/views/pages/users/single.html',
+        controller: 'userEditController',
         controllerAs: 'user'
       });
 
