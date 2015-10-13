@@ -19,6 +19,13 @@ angular.module('app.routes', ['ngRoute'])
         templateUrl:  'app/views/pages/all.html',
         controller:   'userController',
         controllerAs: 'user'
+      })
+
+      // form edit user / create new user (same view)
+      .when('/users/create', {
+        templateUrl: 'app/views/pages/users/single.html',
+        controller:  'userCreateController', 
+        controllerAs: 'user'
       });
 
     // get rid of the hash in the URL

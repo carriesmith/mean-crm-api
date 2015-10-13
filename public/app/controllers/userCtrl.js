@@ -41,4 +41,37 @@ angular.module('userCtrl', ['userService'])
 
     }; // close  vm.deleteUser = function(id)
 
-  }); // close .controller('userController'
+  }) // close .controller('userController'
+  .controller('userCreateController', function(User){
+    
+    var vm = this;
+
+    // variable to hide/show elements of the view to differentiate
+    // between create or edit pages
+    vm.type = 'create';
+
+    // function to create a user
+    vm.saveUser = function(){
+
+      vm.processing = true;
+
+      // clear messages
+      vm.message = '';
+
+      // use the create function in the userService
+      User.create(vm.userData)
+        .success(function(data){
+
+          vm.process = false;
+
+          // clear the form
+          vm.userData = {};
+          vm.message = data.message;
+          console.log("user created message " + vm.message);
+          console.log(data);
+
+        }); // close .success
+
+    }; // close vm.saveUser = function(){
+
+  })
